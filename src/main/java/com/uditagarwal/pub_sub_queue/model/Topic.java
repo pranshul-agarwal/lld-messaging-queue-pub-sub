@@ -23,8 +23,4 @@ public class Topic {
     public synchronized void addMessage(@NonNull final Message message) {
         messages.add(message);
     }
-
-    public void addSubscriber(@NonNull final TopicSubscriber subscriber) {
-        subscribers.add(subscriber);
-    }
 }

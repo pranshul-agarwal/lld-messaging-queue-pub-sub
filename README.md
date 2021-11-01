@@ -10,7 +10,9 @@
 * Inter thread communication
 
 ```
-Main   1..1   MessageBroker   1..n   TopicHandler   1..n    SubscriberWorker   1..1   TopicSubscriber   1..1   ISubscriber
+Main   1..1   MessageBroker   1..n   TopicHandler   1..n    SubscriberWorker   1..1   TopicSubscriber   1..1   ISubscriber  
+Topic  1..n   TopicSubscriber   1..1   ISubscriber
+Topic  1..1   TopicHandler
 ```
 
 ### Video Explanation

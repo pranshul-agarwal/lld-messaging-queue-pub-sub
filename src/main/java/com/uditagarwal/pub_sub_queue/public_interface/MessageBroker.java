@@ -26,7 +26,7 @@ public class MessageBroker {
     }
 
     public void subscribe(@NonNull final ISubscriber subscriber, @NonNull final Topic topic) {
-        topic.addSubscriber(new TopicSubscriber(subscriber));
+        topicHandlers.get(topic.getTopicId()).addSubscriber(new TopicSubscriber(subscriber));
         System.out.println(subscriber.getId() + " subscribed to topic: " + topic.getTopicName());
     }
 
@@ -37,13 +37,6 @@ public class MessageBroker {
     }
 
     public void resetOffset(@NonNull final Topic topic, @NonNull final ISubscriber subscriber, @NonNull final Integer newOffset) {
-        for (TopicSubscriber topicSubscriber : topic.getSubscribers()) {
-            if (topicSubscriber.getSubscriber().equals(subscriber)) {
-                topicSubscriber.getOffset().set(newOffset);
-                System.out.println(topicSubscriber.getSubscriber().getId() + " offset reset to: " + newOffset);
-                new Thread(() -> topicHandlers.get(topic.getTopicId()).startSubscriberWorker(topicSubscriber)).start();
-                break;
-            }
-        }
+        topicHandlers.get(topic.getTopicId()).resetOffset(subscriber, newOffset);
     }
 }
