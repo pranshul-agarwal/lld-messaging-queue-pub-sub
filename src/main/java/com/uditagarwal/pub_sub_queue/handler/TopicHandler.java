@@ -18,11 +18,11 @@ public class TopicHandler {
 
     public void publish() {
         for (TopicSubscriber topicSubscriber:topic.getSubscribers()) {
-            startSubsriberWorker(topicSubscriber);
+            startSubscriberWorker(topicSubscriber);
         }
     }
 
-    public void startSubsriberWorker(@NonNull final TopicSubscriber topicSubscriber) {
+    public void startSubscriberWorker(@NonNull final TopicSubscriber topicSubscriber) {
         final String subscriberId = topicSubscriber.getSubscriber().getId();
         if (!subscriberWorkers.containsKey(subscriberId)) {
             final SubscriberWorker subscriberWorker = new SubscriberWorker(topic, topicSubscriber);
