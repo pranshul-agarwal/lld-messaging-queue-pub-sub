@@ -8,12 +8,12 @@ import lombok.NonNull;
 import lombok.SneakyThrows;
 
 @Getter
-public class SubscriberWorker implements Runnable {
+public class SubscriberHandler implements Runnable {
 
     private final Topic topic;
     private final TopicSubscriber topicSubscriber;
 
-    public SubscriberWorker(@NonNull final Topic topic, @NonNull final TopicSubscriber topicSubscriber) {
+    public SubscriberHandler(@NonNull final Topic topic, @NonNull final TopicSubscriber topicSubscriber) {
         this.topic = topic;
         this.topicSubscriber = topicSubscriber;
     }

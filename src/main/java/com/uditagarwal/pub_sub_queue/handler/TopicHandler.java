@@ -10,16 +10,16 @@ import java.util.Map;
 
 public class TopicHandler {
     private final Topic topic;
-    private final Map<String, SubscriberWorker> subscriberWorkers;
+    private final Map<String, SubscriberHandler> subscriberHandlerMap;
 
     public TopicHandler(@NonNull final Topic topic) {
         this.topic = topic;
-        subscriberWorkers = new HashMap<>();
+        subscriberHandlerMap = new HashMap<>();
     }
 
     public void publish() {
         for (TopicSubscriber topicSubscriber : topic.getSubscribers()) {
-            startSubscriberWorker(topicSubscriber);
+            startSubscriberHandler(topicSubscriber);
         }
     }
 
@@ -35,18 +35,18 @@ public class TopicHandler {
         if(topicSubscriber != null) {
             topicSubscriber.getOffset().set(newOffset);
             System.out.println(topicSubscriber.getSubscriber().getId() + " offset reset to: " + newOffset);
-            new Thread(() -> startSubscriberWorker(topicSubscriber)).start();
+            new Thread(() -> startSubscriberHandler(topicSubscriber)).start();
         }
     }
 
-    private void startSubscriberWorker(@NonNull final TopicSubscriber topicSubscriber) {
+    private void startSubscriberHandler(@NonNull final TopicSubscriber topicSubscriber) {
         final String subscriberId = topicSubscriber.getSubscriber().getId();
-        if (!subscriberWorkers.containsKey(subscriberId)) {
-            final SubscriberWorker subscriberWorker = new SubscriberWorker(topic, topicSubscriber);
-            subscriberWorkers.put(subscriberId, subscriberWorker);
-            new Thread(subscriberWorker).start();
+        if (!subscriberHandlerMap.containsKey(subscriberId)) {
+            final SubscriberHandler subscriberHandler = new SubscriberHandler(topic, topicSubscriber);
+            subscriberHandlerMap.put(subscriberId, subscriberHandler);
+            new Thread(subscriberHandler).start();
         }
-        final SubscriberWorker subscriberWorker = subscriberWorkers.get(subscriberId);
-        subscriberWorker.wakeUpIfNeeded();
+        final SubscriberHandler subscriberHandler = subscriberHandlerMap.get(subscriberId);
+        subscriberHandler.wakeUpIfNeeded();
     }
 }
