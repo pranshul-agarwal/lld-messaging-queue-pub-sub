@@ -7,3 +7,8 @@ We have to design a message queue supporting publisher-subscriber model. It shou
 * Whenever a message is published to a topic, all the subscribers, who are subscribed to that topic, should receive the message.
 * Subscribers should be able to run in parallel
 
+## Observations
+* MessageBroker 1:N Topic 
+* Publisher 1:1 Topic
+* Topic 1:N Subscriber
+* Push model

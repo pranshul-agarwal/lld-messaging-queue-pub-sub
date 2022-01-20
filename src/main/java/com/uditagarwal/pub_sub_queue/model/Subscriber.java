@@ -1,6 +1,5 @@
 package com.uditagarwal.pub_sub_queue.model;
 
-import com.uditagarwal.pub_sub_queue.public_interface.ISubscriber;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
@@ -9,12 +8,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Getter
 @AllArgsConstructor
-public class TopicSubscriber {
+public class Subscriber {
     private final AtomicInteger offset;
-    private final ISubscriber subscriber;
+    private final String id;
+    private final int sleepTimeInMillis;
 
-    public TopicSubscriber(@NonNull final ISubscriber subscriber) {
-        this.subscriber = subscriber;
+    public Subscriber(@NonNull final String subscriberId, final int sleepTimeInMillis) {
+        this.id = subscriberId;
+        this.sleepTimeInMillis = sleepTimeInMillis;
         this.offset = new AtomicInteger(0);
     }
 }

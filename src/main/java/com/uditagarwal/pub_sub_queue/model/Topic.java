@@ -11,7 +11,7 @@ public class Topic {
     private final String topicName;
     private final String topicId;
     private final List<Message> messages; // TODO: Change getter this to send only immutable list outside.
-    private final List<TopicSubscriber> subscribers; // TODO: Change getter this to send only immutable list outside.
+    private final List<Subscriber> subscribers; // TODO: Change getter this to send only immutable list outside.
 
     public Topic(@NonNull final String topicName, @NonNull final String topicId) {
         this.topicName = topicName;
