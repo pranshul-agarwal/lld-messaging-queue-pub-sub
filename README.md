@@ -3,7 +3,7 @@
 
 ### Resources used
 * https://www.youtube.com/watch?v=4BEzgPlLKTo  
-* https://github.com/anomaly2104/low-level-design-messaging-messageBrokerService-pub-sub
+* https://github.com/anomaly2104/low-level-design-messaging-messageBroker-pub-sub
 
 ### Concepts used
 * Thread synchronization

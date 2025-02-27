@@ -7,22 +7,22 @@ import lombok.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TopicHandler {
+public class TopicManager {
     private final Topic topic;
     private final Map<String, SubscriberWorker> subscriberHandlerMap;
 
-    public TopicHandler(@NonNull final Topic topic) {
+    public TopicManager(@NonNull final Topic topic) {
         this.topic = topic;
         subscriberHandlerMap = new HashMap<>();
     }
 
-    public void publish() {
+    public void notifySubscribers() {
         for (Subscriber subscriber : topic.getSubscribers()) {
             startSubscriberWorker(subscriber);
         }
     }
 
-    public void addSubscriber(Subscriber subscriber) {
+    public void registerSubscriber(Subscriber subscriber) {
         topic.getSubscribers().add(subscriber);
     }
 
